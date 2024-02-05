@@ -17,5 +17,21 @@ namespace Holloman_Morgage_Project
             InitializeComponent();
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            this.txtPrinciple.Text = string.Empty;
+            this.txtOther.Text = string.Empty;
+            this.rad15Y.Checked = false;
+            this.rad30Y.Checked = true;
+            this.radOther.Checked = false;
+            this.cboInterest.SelectedIndex = -1;
+        }
+
+
     }
 }
