@@ -49,7 +49,7 @@
             // 
             this.txtPrinciple.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrinciple.Location = new System.Drawing.Point(237, 15);
-            this.txtPrinciple.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrinciple.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrinciple.Name = "txtPrinciple";
             this.txtPrinciple.Size = new System.Drawing.Size(292, 34);
             this.txtPrinciple.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             this.txtOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOther.Location = new System.Drawing.Point(237, 186);
-            this.txtOther.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOther.Margin = new System.Windows.Forms.Padding(4);
             this.txtOther.Name = "txtOther";
             this.txtOther.Size = new System.Drawing.Size(217, 34);
             this.txtOther.TabIndex = 3;
@@ -80,7 +80,7 @@
             this.radOther.AutoSize = true;
             this.radOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radOther.Location = new System.Drawing.Point(16, 187);
-            this.radOther.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radOther.Margin = new System.Windows.Forms.Padding(4);
             this.radOther.Name = "radOther";
             this.radOther.Size = new System.Drawing.Size(112, 33);
             this.radOther.TabIndex = 3;
@@ -94,7 +94,7 @@
             this.rad30Y.AutoSize = true;
             this.rad30Y.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rad30Y.Location = new System.Drawing.Point(16, 144);
-            this.rad30Y.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rad30Y.Margin = new System.Windows.Forms.Padding(4);
             this.rad30Y.Name = "rad30Y";
             this.rad30Y.Size = new System.Drawing.Size(101, 29);
             this.rad30Y.TabIndex = 0;
@@ -108,7 +108,7 @@
             this.rad15Y.AutoSize = true;
             this.rad15Y.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rad15Y.Location = new System.Drawing.Point(16, 101);
-            this.rad15Y.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rad15Y.Margin = new System.Windows.Forms.Padding(4);
             this.rad15Y.Name = "rad15Y";
             this.rad15Y.Size = new System.Drawing.Size(101, 29);
             this.rad15Y.TabIndex = 2;
@@ -151,7 +151,7 @@
             "4.4",
             "4.5"});
             this.cboInterest.Location = new System.Drawing.Point(237, 255);
-            this.cboInterest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboInterest.Margin = new System.Windows.Forms.Padding(4);
             this.cboInterest.Name = "cboInterest";
             this.cboInterest.Size = new System.Drawing.Size(104, 37);
             this.cboInterest.TabIndex = 1;
@@ -185,18 +185,19 @@
             // 
             this.btnCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalc.Location = new System.Drawing.Point(75, 308);
-            this.btnCalc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCalc.Margin = new System.Windows.Forms.Padding(4);
             this.btnCalc.Name = "btnCalc";
             this.btnCalc.Size = new System.Drawing.Size(381, 53);
             this.btnCalc.TabIndex = 15;
             this.btnCalc.Text = "Calculate";
             this.btnCalc.UseVisualStyleBackColor = true;
+            this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(88, 377);
+            this.lblTotal.Location = new System.Drawing.Point(117, 380);
             this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(0, 29);
@@ -207,7 +208,7 @@
             // 
             this.lblTotalNum.AutoSize = true;
             this.lblTotalNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalNum.Location = new System.Drawing.Point(171, 412);
+            this.lblTotalNum.Location = new System.Drawing.Point(200, 415);
             this.lblTotalNum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalNum.Name = "lblTotalNum";
             this.lblTotalNum.Size = new System.Drawing.Size(0, 32);
@@ -218,7 +219,7 @@
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.Location = new System.Drawing.Point(16, 464);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(184, 52);
             this.btnClear.TabIndex = 18;
@@ -230,7 +231,7 @@
             // 
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Location = new System.Drawing.Point(361, 464);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(169, 48);
             this.btnExit.TabIndex = 19;
