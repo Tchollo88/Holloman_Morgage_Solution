@@ -146,8 +146,8 @@ namespace Holloman_Morgage_Project
             decimal calc = p * rem;
 
             //Truncates calculation to prep it for currency string
-            calc = truncT(calc);
-            calc = Math.Round(calc,0,MidpointRounding.AwayFromZero);
+            //calc = truncT(calc);
+            //calc = Math.Round(calc,0,MidpointRounding.AwayFromZero);
             
             return calc;
         }
@@ -156,7 +156,7 @@ namespace Holloman_Morgage_Project
         public decimal truncP(decimal r)
         {
             r = r * 10000;
-            r = Math.Truncate(r);
+            //r = Math.Truncate(r);
             r = r / 10000;
 
             return r;
