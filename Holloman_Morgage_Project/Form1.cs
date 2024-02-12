@@ -19,6 +19,9 @@ namespace Holloman_Morgage_Project
 
             -comment to teacher-
         I hope the comments help you identify what each part of my code does and helps you navigate it more easily.
+
+        Still having a problem with the math, I am missing something from my caculation and don't know what it is.
+
         **/
         
         public frmMain()
