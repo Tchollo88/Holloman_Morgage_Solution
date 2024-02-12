@@ -1,0 +1,3 @@
+﻿lblTotal - default location (117, 380) 
+lblTotalNum - default location (200,415)
+

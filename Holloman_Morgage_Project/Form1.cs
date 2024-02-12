@@ -43,16 +43,40 @@ namespace Holloman_Morgage_Project
             this.rad30Y.Checked = true;
             this.radOther.Checked = false;
             this.cboInterest.SelectedIndex = -1;
+            lblTotal.Text = string.Empty;
+            lblTotalNum.Text = string.Empty;
         }
 
         //Initializes calculation, prints text to labels
         private void btnCalc_Click(object sender, EventArgs e)
         {
             decimal total = 0;
-            total = mtotal(princ(),rate(), year(), pow_mor(rate(), year()));
 
-            lblTotal.Text = "Monthly Payment is:";
-            lblTotalNum.Text = total.ToString("C2");
+            if (txtPrinciple.Text != "" &&
+                cboInterest.SelectedIndex != -1)
+            {
+                total = mtotal(princ(), rate(), year(), pow_mor(rate(), year()));
+
+                lblTotal.Location = new Point(105, 310);
+                lblTotal.ForeColor = Color.Black;
+                lblTotal.Text = "Monthly Payment is:";
+
+                lblTotalNum.Location = new Point(155, 340);
+                lblTotalNum.ForeColor = Color.Black;
+                lblTotalNum.Text = total.ToString("C2");
+            }
+            else
+            {
+                lblTotal.Location = new Point(35, 310);
+                lblTotal.ForeColor = Color.Red;
+                lblTotal.Text = "The fields were filled out incorrectly,";
+
+                lblTotalNum.Location = new Point(10, 340);
+                lblTotalNum.ForeColor = Color.Red;
+                lblTotalNum.Text = "please fill in all areas and try again.";
+            }
+            
+
         }
 
 
@@ -83,7 +107,7 @@ namespace Holloman_Morgage_Project
             }
             else if (radOther.Checked)
             {
-                return year = 12 * decimal.Parse(radOther.Text);
+                return year = 12 * decimal.Parse(txtOther.Text);
             }
             return year;
         }
@@ -120,6 +144,7 @@ namespace Holloman_Morgage_Project
 
             //Truncates calculation to prep it for currency string
             calc = truncT(calc);
+            calc = Math.Round(calc,0,MidpointRounding.AwayFromZero);
             
             return calc;
         }
