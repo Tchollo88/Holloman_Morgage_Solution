@@ -31,10 +31,27 @@ namespace Holloman_Morgage_Project
 
         /**private access codes**/
 
+        //Locks btnClear default on intialization
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            btnClear.Enabled = false;
+            txtOther.Enabled = false;
+        }
+
+
+        private void radOther_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radOther.Checked)
+            {
+                txtOther.Enabled = true;
+
+            }
+        }
+
         //Exit program
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         //Clears all fields to initial setup (start-up setup)
@@ -48,6 +65,9 @@ namespace Holloman_Morgage_Project
             this.cboInterest.SelectedIndex = -1;
             lblTotal.Text = string.Empty;
             lblTotalNum.Text = string.Empty;
+            
+            btnClear.Enabled = false;
+            rad30Y.Focus();
         }
 
         //Initializes calculation, prints text to labels
@@ -55,7 +75,54 @@ namespace Holloman_Morgage_Project
         {
             decimal total = 0;
 
-            if (txtPrinciple.Text != "" &&
+            if (txtPrinciple.Text == string.Empty &&
+                radOther.Checked && txtOther.Enabled == false &&
+                cboInterest.SelectedIndex == -1 || 
+                txtPrinciple.Text == string.Empty &&
+                cboInterest.SelectedIndex == -1)
+            {
+                lblTotal.Location = new Point(30, 310);
+                lblTotal.ForeColor = Color.Red;
+                lblTotal.Text = "The fields were filled out incorrectly,";
+
+                lblTotalNum.Location = new Point(10, 340);
+                lblTotalNum.ForeColor = Color.Red;
+                lblTotalNum.Text = "please fill in all areas and try again.";
+            }
+            else if (txtPrinciple.Text == string.Empty )
+            {
+                lblTotal.Location = new Point(60, 310);
+                lblTotal.ForeColor = Color.Red;
+                lblTotal.Text = "There is an error in Principle,";
+
+                lblTotalNum.Location = new Point(10, 340);
+                lblTotalNum.ForeColor = Color.Red;
+                lblTotalNum.Text = "please put the amount of intial cost.";
+            }
+            else if (radOther.Checked && txtOther.Text == string.Empty)
+            {
+                lblTotal.Location = new Point(50, 310);
+                lblTotal.ForeColor = Color.Red;
+                lblTotal.Text = "The years in Other are missing,";
+
+                lblTotalNum.Location = new Point(29, 340);
+                lblTotalNum.ForeColor = Color.Red;
+                lblTotalNum.Text = "please enter an amout of years.";
+            }
+            else if (cboInterest.SelectedIndex == -1)
+            {
+                lblTotal.Location = new Point(37, 310);
+                lblTotal.ForeColor = Color.Red;
+                lblTotal.Text = "You are missing and interest rate,";
+
+                lblTotalNum.Location = new Point(43, 340);
+                lblTotalNum.ForeColor = Color.Red;
+                lblTotalNum.Text = "please enter an interest rate.";
+            }
+            else if (txtPrinciple.Text != string.Empty &&
+                cboInterest.SelectedIndex != -1 ||
+                txtPrinciple.Text != string.Empty &&
+                radOther.Checked && txtOther.Text != string.Empty &&
                 cboInterest.SelectedIndex != -1)
             {
                 total = mtotal(princ(), rate(), year(), pow_mor(rate(), year()));
@@ -67,19 +134,9 @@ namespace Holloman_Morgage_Project
                 lblTotalNum.Location = new Point(155, 340);
                 lblTotalNum.ForeColor = Color.Black;
                 lblTotalNum.Text = total.ToString("C2");
-            }
-            else
-            {
-                lblTotal.Location = new Point(35, 310);
-                lblTotal.ForeColor = Color.Red;
-                lblTotal.Text = "The fields were filled out incorrectly,";
 
-                lblTotalNum.Location = new Point(10, 340);
-                lblTotalNum.ForeColor = Color.Red;
-                lblTotalNum.Text = "please fill in all areas and try again.";
+                btnClear.Enabled = true;
             }
-            
-
         }
 
 
@@ -110,7 +167,16 @@ namespace Holloman_Morgage_Project
             }
             else if (radOther.Checked)
             {
-                return year = 12 * decimal.Parse(txtOther.Text);
+                if(txtOther.Text == string.Empty)
+                {
+                    txtOther.Enabled = false;
+                    year = 1;
+                }
+                else
+                {
+                    return year = 12 * decimal.Parse(txtOther.Text);
+                }
+                
             }
             return year;
         }
@@ -122,7 +188,6 @@ namespace Holloman_Morgage_Project
             decimal rate = decimal.Parse(cboInterest.Text);
             rate = rate / 100;
             rate = rate / 12;
-            rate = truncP(rate);
             return rate;
         }
 
@@ -138,38 +203,25 @@ namespace Holloman_Morgage_Project
         //Computes the math to the mortgage formula, broke it down to simple terms
         public decimal mtotal(decimal p, decimal r, decimal n, decimal u)
         {
+            decimal neg = 0;
+            decimal calc = 0;
+
             /*| calc = m | formula m = P[r(1+r)^n/((1+r)^n)-1)] |*/
-            //calc = p * (r * (1 + r) * n) / ((1 + r) * n) - 1);
-            decimal top = r * u;            
-            decimal bott = u - 1;            
-            decimal rem = top / bott;            
-            decimal calc = p * rem;
 
-            //Truncates calculation to prep it for currency string
-            //calc = truncT(calc);
-            //calc = Math.Round(calc,0,MidpointRounding.AwayFromZero);
-            
+            if (n == p)
+            {
+                txtOther.Enabled = false;
+                calc = 0;
+            }
+            else
+            {
+                decimal top = r * u;
+                decimal bott = u - 1;
+                decimal rem = top / bott;
+                calc = p * rem;
+                return calc;
+            }
             return calc;
-        }
-
-        //Truncates to the 10,000th value
-        public decimal truncP(decimal r)
-        {
-            r = r * 10000;
-            //r = Math.Truncate(r);
-            r = r / 10000;
-
-            return r;
-        }
-
-        //Truncates to the 100th value
-        public decimal truncT(decimal r)
-        {
-            r = r * 100;
-            r = Math.Truncate(r);
-            r = r / 100;
-
-            return r;
         }
 
         

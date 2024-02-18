@@ -88,6 +88,7 @@
             this.radOther.Text = "Other...";
             this.radOther.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radOther.UseVisualStyleBackColor = true;
+            this.radOther.CheckedChanged += new System.EventHandler(this.radOther_CheckedChanged);
             // 
             // rad30Y
             // 
@@ -264,6 +265,7 @@
             this.MinimumSize = new System.Drawing.Size(557, 571);
             this.Name = "frmMain";
             this.Text = "Todd Holloman : Morgage Calculator";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
