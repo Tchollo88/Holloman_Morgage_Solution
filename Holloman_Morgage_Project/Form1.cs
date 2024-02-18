@@ -19,9 +19,6 @@ namespace Holloman_Morgage_Project
 
             -comment to teacher-
         I hope the comments help you identify what each part of my code does and helps you navigate it more easily.
-
-        Still having a problem with the math, I am missing something from my caculation and don't know what it is.
-
         **/
         
         public frmMain()
@@ -31,14 +28,14 @@ namespace Holloman_Morgage_Project
 
         /**private access codes**/
 
-        //Locks btnClear default on intialization
+        //Locks btnClear and disables txtOther default on intialization
         private void frmMain_Load(object sender, EventArgs e)
         {
             btnClear.Enabled = false;
             txtOther.Enabled = false;
         }
 
-
+        //enables the txt box when selecting radOther
         private void radOther_CheckedChanged(object sender, EventArgs e)
         {
             if(radOther.Checked)
@@ -54,7 +51,7 @@ namespace Holloman_Morgage_Project
             Application.Exit();
         }
 
-        //Clears all fields to initial setup (start-up setup)
+        //Clears all fields to initial setup(start-up setup), locks btnClear
         private void btnClear_Click(object sender, EventArgs e)
         {
             this.txtPrinciple.Text = string.Empty;
@@ -181,7 +178,7 @@ namespace Holloman_Morgage_Project
             return year;
         }
 
-        //Builds the interest rate variable, and converts is to percentage, (R)
+        //Builds the interest rate variable, and converts it to percentage, or (R)
         public decimal rate()
         {
             /*rate = r*/
@@ -200,7 +197,8 @@ namespace Holloman_Morgage_Project
             return pow;
         }
 
-        //Computes the math to the mortgage formula, broke it down to simple terms
+        //Computes the math to the mortgage formula
+        // broke it down to simple terms
         public decimal mtotal(decimal p, decimal r, decimal n, decimal u)
         {
             decimal neg = 0;
