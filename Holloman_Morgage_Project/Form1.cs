@@ -45,6 +45,12 @@ namespace Holloman_Morgage_Project
             }
         }
 
+
+        private void txtOther_NumOnly(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !Char.IsNumber(e.KeyChar) && e.KeyChar != 8;
+        }
+
         //Exit program
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -71,6 +77,7 @@ namespace Holloman_Morgage_Project
         private void btnCalc_Click(object sender, EventArgs e)
         {
             decimal total = 0;
+            decimal check = decimal.Parse(txtOther.Text);
 
             if (txtPrinciple.Text == string.Empty &&
                 radOther.Checked && txtOther.Enabled == false &&
@@ -122,17 +129,30 @@ namespace Holloman_Morgage_Project
                 radOther.Checked && txtOther.Text != string.Empty &&
                 cboInterest.SelectedIndex != -1)
             {
-                total = mtotal(princ(), rate(), year(), pow_mor(rate(), year()));
+                if(check > 4 && check < 41)
+                {
+                    total = mtotal(princ(), rate(), year(), pow_mor(rate(), year()));
 
-                lblTotal.Location = new Point(105, 310);
-                lblTotal.ForeColor = Color.Black;
-                lblTotal.Text = "Monthly Payment is:";
+                    lblTotal.Location = new Point(105, 310);
+                    lblTotal.ForeColor = Color.Black;
+                    lblTotal.Text = "Monthly Payment is:";
 
-                lblTotalNum.Location = new Point(155, 340);
-                lblTotalNum.ForeColor = Color.Black;
-                lblTotalNum.Text = total.ToString("C2");
+                    lblTotalNum.Location = new Point(155, 340);
+                    lblTotalNum.ForeColor = Color.Green;
+                    lblTotalNum.Text = total.ToString("C2");
 
-                btnClear.Enabled = true;
+                    btnClear.Enabled = true;
+                }
+                else if (check < 5 || check > 40)
+                {
+                    lblTotal.Location = new Point(15, 310);
+                    lblTotal.ForeColor = Color.Red;
+                    lblTotal.Text = "The term amount cannot be calculated,";
+
+                    lblTotalNum.Location = new Point(0, 340);
+                    lblTotalNum.ForeColor = Color.Red;
+                    lblTotalNum.Text = "please use the amounts 5 through 40.";
+                }
             }
         }
 
@@ -152,7 +172,7 @@ namespace Holloman_Morgage_Project
         public decimal year()
         {
             /*year = n*/
-            decimal year = 0;
+            decimal year = decimal.Parse(txtOther.Text);
 
             if(rad15Y.Checked)
             {
@@ -164,16 +184,19 @@ namespace Holloman_Morgage_Project
             }
             else if (radOther.Checked)
             {
-                if(txtOther.Text == string.Empty)
+                if (txtOther.Text == string.Empty)
                 {
                     txtOther.Enabled = false;
-                    year = 1;
+                    return year = 1;
                 }
-                else
+                else if (year > 4 && year < 41)
                 {
-                    return year = 12 * decimal.Parse(txtOther.Text);
+                    return year = 12 * year;
                 }
-                
+                else if (year < 5 && year > 40)
+                {
+                   return year = 1;
+                }
             }
             return year;
         }
@@ -222,6 +245,5 @@ namespace Holloman_Morgage_Project
             return calc;
         }
 
-        
     }
 }
