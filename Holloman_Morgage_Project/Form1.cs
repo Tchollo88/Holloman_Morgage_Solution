@@ -45,8 +45,14 @@ namespace Holloman_Morgage_Project
             }
         }
 
-
+        //Makes it so only numbers can be enter, also allows backspaces
         private void txtOther_NumOnly(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !Char.IsNumber(e.KeyChar) && e.KeyChar != 8;
+        }
+
+        //Makes it so only numbers can be enter, also allows backspaces
+        private void txtPrinciple_NumOnly(object sender, KeyPressEventArgs e)
         {
             e.Handled = !Char.IsNumber(e.KeyChar) && e.KeyChar != 8;
         }
@@ -244,6 +250,7 @@ namespace Holloman_Morgage_Project
             }
             return calc;
         }
+
 
     }
 }

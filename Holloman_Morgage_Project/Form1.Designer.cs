@@ -53,6 +53,7 @@
             this.txtPrinciple.Name = "txtPrinciple";
             this.txtPrinciple.Size = new System.Drawing.Size(292, 34);
             this.txtPrinciple.TabIndex = 1;
+            this.txtPrinciple.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrinciple_NumOnly);
             // 
             // lblPrinciple
             // 
