@@ -53,7 +53,6 @@
             this.txtPrinciple.Name = "txtPrinciple";
             this.txtPrinciple.Size = new System.Drawing.Size(292, 34);
             this.txtPrinciple.TabIndex = 1;
-            this.txtPrinciple.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrinciple_NumOnly);
             // 
             // lblPrinciple
             // 
@@ -75,7 +74,6 @@
             this.txtOther.Name = "txtOther";
             this.txtOther.Size = new System.Drawing.Size(217, 34);
             this.txtOther.TabIndex = 3;
-            this.txtOther.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOther_NumOnly);
             // 
             // radOther
             // 

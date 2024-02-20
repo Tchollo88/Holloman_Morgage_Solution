@@ -45,18 +45,6 @@ namespace Holloman_Morgage_Project
             }
         }
 
-        //Makes it so only numbers can be enter, also allows backspaces
-        private void txtOther_NumOnly(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !Char.IsNumber(e.KeyChar) && e.KeyChar != 8;
-        }
-
-        //Makes it so only numbers can be enter, also allows backspaces
-        private void txtPrinciple_NumOnly(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !Char.IsNumber(e.KeyChar) && e.KeyChar != 8;
-        }
-
         //Exit program
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -83,7 +71,12 @@ namespace Holloman_Morgage_Project
         private void btnCalc_Click(object sender, EventArgs e)
         {
             decimal total = 0;
-            decimal check = decimal.Parse(txtOther.Text);
+            decimal other;
+            decimal principle;
+
+            bool princcheck = decimal.TryParse(txtPrinciple.Text, out principle);
+            bool othercheck = decimal.TryParse(txtOther.Text, out other);
+            bool txtcheck = decimal.TryParse(txtOther.Text, out other) && decimal.TryParse(txtPrinciple.Text, out principle);
 
             if (txtPrinciple.Text == string.Empty &&
                 radOther.Checked && txtOther.Enabled == false &&
@@ -99,7 +92,30 @@ namespace Holloman_Morgage_Project
                 lblTotalNum.ForeColor = Color.Red;
                 lblTotalNum.Text = "please fill in all areas and try again.";
             }
-            else if (txtPrinciple.Text == string.Empty )
+            else if (princcheck == false)
+            {
+                if (txtPrinciple.Text == string.Empty)
+                {
+                    lblTotal.Location = new Point(60, 310);
+                    lblTotal.ForeColor = Color.Red;
+                    lblTotal.Text = "There is an error in Principle,";
+
+                    lblTotalNum.Location = new Point(10, 340);
+                    lblTotalNum.ForeColor = Color.Red;
+                    lblTotalNum.Text = "please put the amount of intial cost.";
+                }
+                else
+                {
+                    lblTotal.Location = new Point(60, 310);
+                    lblTotal.ForeColor = Color.Red;
+                    lblTotal.Text = "There is an error in Principle,";
+
+                    lblTotalNum.Location = new Point(10, 340);
+                    lblTotalNum.ForeColor = Color.Red;
+                    lblTotalNum.Text = "please input a number and try again.";
+                }
+            }
+            else if (txtPrinciple.Text == string.Empty)
             {
                 lblTotal.Location = new Point(60, 310);
                 lblTotal.ForeColor = Color.Red;
@@ -109,15 +125,32 @@ namespace Holloman_Morgage_Project
                 lblTotalNum.ForeColor = Color.Red;
                 lblTotalNum.Text = "please put the amount of intial cost.";
             }
-            else if (radOther.Checked && txtOther.Text == string.Empty)
+            else if (othercheck == false)
             {
-                lblTotal.Location = new Point(50, 310);
-                lblTotal.ForeColor = Color.Red;
-                lblTotal.Text = "The years in Other are missing,";
+                if (txtOther.Text == string.Empty)
+                {
+                    lblTotal.Location = new Point(50, 310);
+                    lblTotal.ForeColor = Color.Red;
+                    lblTotal.Text = "The years in Other are missing,";
 
-                lblTotalNum.Location = new Point(29, 340);
-                lblTotalNum.ForeColor = Color.Red;
-                lblTotalNum.Text = "please enter an amout of years.";
+                    lblTotalNum.Location = new Point(29, 340);
+                    lblTotalNum.ForeColor = Color.Red;
+                    lblTotalNum.Text = "please enter an amout of years.";
+                }
+                else
+                {
+                    lblTotal.Location = new Point(90, 310);
+                    lblTotal.ForeColor = Color.Red;
+                    lblTotal.Text = "Other's input is invalid,";
+
+                    lblTotalNum.Location = new Point(7, 340);
+                    lblTotalNum.ForeColor = Color.Red;
+                    lblTotalNum.Text = "please enter an amount in numbers.";
+                }               
+            }
+            else if (txtOther.Text == string.Empty)
+            {
+                
             }
             else if (cboInterest.SelectedIndex == -1)
             {
@@ -129,36 +162,22 @@ namespace Holloman_Morgage_Project
                 lblTotalNum.ForeColor = Color.Red;
                 lblTotalNum.Text = "please enter an interest rate.";
             }
-            else if (txtPrinciple.Text != string.Empty &&
+            else if (princcheck == true &&
                 cboInterest.SelectedIndex != -1 ||
-                txtPrinciple.Text != string.Empty &&
-                radOther.Checked && txtOther.Text != string.Empty &&
+                txtcheck == true &&
                 cboInterest.SelectedIndex != -1)
             {
-                if(check > 4 && check < 41)
-                {
-                    total = mtotal(princ(), rate(), year(), pow_mor(rate(), year()));
+                total = mtotal(princ(), rate(), year(), pow_mor(rate(), year()));
 
-                    lblTotal.Location = new Point(105, 310);
-                    lblTotal.ForeColor = Color.Black;
-                    lblTotal.Text = "Monthly Payment is:";
+                lblTotal.Location = new Point(105, 310);
+                lblTotal.ForeColor = Color.Black;
+                lblTotal.Text = "Monthly Payment is:";
 
-                    lblTotalNum.Location = new Point(155, 340);
-                    lblTotalNum.ForeColor = Color.Green;
-                    lblTotalNum.Text = total.ToString("C2");
+                lblTotalNum.Location = new Point(155, 340);
+                lblTotalNum.ForeColor = Color.Green;
+                lblTotalNum.Text = total.ToString("C2");
 
-                    btnClear.Enabled = true;
-                }
-                else if (check < 5 || check > 40)
-                {
-                    lblTotal.Location = new Point(15, 310);
-                    lblTotal.ForeColor = Color.Red;
-                    lblTotal.Text = "The term amount cannot be calculated,";
-
-                    lblTotalNum.Location = new Point(0, 340);
-                    lblTotalNum.ForeColor = Color.Red;
-                    lblTotalNum.Text = "please use the amounts 5 through 40.";
-                }
+                btnClear.Enabled = true;
             }
         }
 
